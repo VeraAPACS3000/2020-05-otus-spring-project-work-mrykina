@@ -38,6 +38,7 @@ public class CurrencyExchangeServicesImpl implements CurrencyExchangeServices {
 
     @Override
     @Transactional
+    //парсинг
     public Map<String, Double> getListRatesFromParserDailyCurrencyInfo(DailyCurrencyInfo info) {
         Map<String, Double> resultValutesAndRates = new HashMap<>();
         Map<String, Valute> valutes = info.getValute();

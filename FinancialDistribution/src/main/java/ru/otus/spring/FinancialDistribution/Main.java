@@ -7,7 +7,7 @@ import ru.otus.spring.FinancialDistribution.configuration.PropsSettings;
 
 
 @SpringBootApplication
-@EnableConfigurationProperties(PropsSettings.class)
+@EnableConfigurationProperties({PropsSettings.class})
 public class Main {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
