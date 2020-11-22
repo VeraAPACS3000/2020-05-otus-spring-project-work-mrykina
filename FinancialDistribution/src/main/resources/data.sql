@@ -32,3 +32,27 @@ insert into BALANCES (ID, ID_CATEGORY, VALUTE, BALANCE, `DATE`)
 values (3, 3, 'USD', 700.00, CURRENT_DATE);
 insert into BALANCES (ID, ID_CATEGORY, VALUTE, BALANCE, `DATE`)
 values (4, 3, 'EUR', 800.45, CURRENT_DATE);
+
+--USER
+insert into `USER` (ID, USERNAME, PASSWORD)
+values (1, 'BOB', '123');
+
+insert into `USER` (ID, USERNAME, PASSWORD)
+values (2, 'SVETA', '123');
+
+insert into `USER` (ID, USERNAME, PASSWORD)
+values (3, 'PETR', '123');
+
+--ROLES
+insert into `ROLE` (ID, `NAME`, ID_USER)
+values (1, 'ROLE_USER', 1);
+
+insert into `ROLE` (ID, `NAME`,ID_USER)
+values (2, 'ROLE_ADMIN', 1);
+
+insert into `ROLE` (ID, `NAME`,ID_USER)
+values (3, 'ROLE_MANAGER', 2);
+
+insert into `ROLE` (ID, `NAME`, ID_USER)
+values (4, 'ROLE_USER', 3);
+

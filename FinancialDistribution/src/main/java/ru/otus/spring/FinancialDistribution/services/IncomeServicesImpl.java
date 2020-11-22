@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class IncomeServicesImpl implements IncomeServices {
 
-    IncomeRepositoryJpa repository;
+    private final IncomeRepositoryJpa repository;
 
     IncomeServicesImpl(IncomeRepositoryJpa repository) {
         this.repository = repository;

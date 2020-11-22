@@ -1,5 +1,6 @@
 package ru.otus.spring.FinancialDistribution.services;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.FinancialDistribution.exceptions.ExceptionCalculate;
@@ -19,7 +20,7 @@ import static ru.otus.spring.FinancialDistribution.utils.Constants.*;
 public class CategoryServicesImpl implements CategoryServices {
     private static Logger log = Logger.getLogger(CategoryServicesImpl.class.getName());
 
-    public CategoryRepositoryJpa repository;
+    public final CategoryRepositoryJpa repository;
 
     CategoryServicesImpl(CategoryRepositoryJpa repository) {
         this.repository = repository;
@@ -48,11 +49,14 @@ public class CategoryServicesImpl implements CategoryServices {
     @Override
     @Transactional
     public void addNewCategory(CategoryBody bodyCategory) {
-        repository.save(repository.toCategory(bodyCategory));
+        Category category = repository.toCategory(bodyCategory);
+        repository.save(category);
     }
+
 
     @Override
     @Transactional(readOnly = true)
+    @Secured("ROLE_ADMIN")
     public Map<Long, Double> calculatePercentsOnCategories(Double totalAmount) throws ExceptionCalculate {
         log.info("start calculatePercentsOnCategories");
         Map<Long, Double> mapPercentsCategories = new HashMap<>();

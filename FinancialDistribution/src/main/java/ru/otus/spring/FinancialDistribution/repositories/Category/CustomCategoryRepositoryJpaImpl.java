@@ -19,7 +19,6 @@ public class CustomCategoryRepositoryJpaImpl implements CustomCategoryRepository
         this.categoryRepositoryJpa = categoryRepositoryJpa;
     }
 
-    //TODO проверку сделать как себя вести если нет категории
     @Override
     public void updateBalanceOnCategory(Map<Long, Double> mapToUpdate) {
         for (Map.Entry<Long, Double> balance : mapToUpdate.entrySet()) {
@@ -51,11 +50,11 @@ public class CustomCategoryRepositoryJpaImpl implements CustomCategoryRepository
     public Category toCategory(CategoryBody bodyCategory) {
         Category newCategory = new Category(
                 bodyCategory.getName(),
-                bodyCategory.getBalance(),
-                bodyCategory.getPercent(),
+                Double.parseDouble(bodyCategory.getBalance()),
+                Double.parseDouble(bodyCategory.getPercent()),
                 bodyCategory.getComment(),
-                bodyCategory.getPurposeAmount(),
-                bodyCategory.getActive()
+                Double.parseDouble(bodyCategory.getPurposeAmount()),
+                1
         );
         return newCategory;
     }

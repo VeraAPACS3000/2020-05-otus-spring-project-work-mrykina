@@ -16,8 +16,8 @@ import java.util.List;
 @Service
 public class BalanceValuteServicesImpl implements BalanceValuteServices {
 
-    BalanceValuteRepositoryJpa repository;
-    ExchangeRateRepositoryJpa repositoryExchangeRates;
+    private final BalanceValuteRepositoryJpa repository;
+    private final ExchangeRateRepositoryJpa repositoryExchangeRates;
 
     BalanceValuteServicesImpl(BalanceValuteRepositoryJpa repository, ExchangeRateRepositoryJpa repositoryExchangeRates) {
         this.repository = repository;

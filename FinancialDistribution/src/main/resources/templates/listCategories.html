@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>CATEGORIES</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .books, .books td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>СПИСОК КАТЕГОРИЙ:</h1>
+<table class="books" border="1" width="600" bgcolor="#00ff00">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>name</th>
+        <th>balance</th>
+        <th>%</th>
+        <th>comment</th>
+        <th>my purpose</th>
+        <th>status</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<div class="blockButtonAddCategoryBook">
+    <a href="addCategory" id="refAddCategory">Добавить ещё категорию</a>
+</div>
+<script>
+    $(
+        function () {
+            $.get('/api/categories_active').done(
+                function (category) {
+                    category.forEach(
+                        function (category) {
+                            $('tbody').append(`<tr>
+                        <td>${category.id}</td>
+                        <td>${category.name}</td>
+                        <td>${category.balance}</td>
+                        <td>${category.price}</td>
+                        <td>${category.comment}</td>
+                        <td>${category.purposeAmount}</td>
+                        <td>${category.status}</td>
+                    </tr>
+                `)
+                        }
+                    );
+                }
+            )
+        }
+    );
+</script>
+<script>
+    let link;
+
+    link = document.getElementById('refAddCategory');
+
+    link.onclick = function(e) {
+        e.preventDefault();
+        ajaxGetAddNewCategory();
+    }
+
+    function ajaxGetAddNewCategory() {
+        $.ajax({
+            type: "GET",
+            url: window.location.replace("/addNewCategory"),
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (e) {
+                alert("Error!")
+                console.log("ERROR: ", e);
+            }
+        });
+    }
+</script>
+</body>
+</html>

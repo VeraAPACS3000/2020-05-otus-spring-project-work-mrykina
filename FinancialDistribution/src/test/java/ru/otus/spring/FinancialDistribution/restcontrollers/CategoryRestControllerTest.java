@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(CategoryRestController.class)
 public class CategoryRestControllerTest {
 
-    private final Long DELETE_ID_CATEGORY = 1l;
+    private final String DELETE_ID_CATEGORY = "1";
 
     @Autowired
     MockMvc mvc;
@@ -35,11 +35,11 @@ public class CategoryRestControllerTest {
         CategoryBody categoryBody = new CategoryBody(
                 DELETE_ID_CATEGORY,
                 "name",
-                1d,
-                1d,
+                "1",
+                "1",
                 "",
-                1d,
-                1);
+                "1",
+                "1");
 
         mvc.perform(post("/api/categories/category/delete")
                 .contentType(MediaType.APPLICATION_JSON)

@@ -2,15 +2,19 @@ package ru.otus.spring.FinancialDistribution.restcontrollers;
 
 public class CategoryBody {
 
-    private final Long id;
-    private final String name;
-    private final Double balance;
-    private final Double percent;
-    private final String comment;
-    private final Double purposeAmount;
-    private int active;
+    private String id;
+    private String name;
+    private String balance;
+    private String percent;
+    private String comment;
+    private String purposeAmount;
+    private String active;
 
-    public CategoryBody(Long id, String name, Double balance, Double percent, String comment, Double purposeAmount, int active) {
+    public CategoryBody() {
+
+    }
+
+    public CategoryBody(String id, String name, String balance, String percent, String comment, String purposeAmount, String active) {
         this.id = id;
         this.name = name;
         this.balance = balance;
@@ -20,15 +24,23 @@ public class CategoryBody {
         this.active = active;
     }
 
-    public Double getBalance() {
+    public CategoryBody(String name, String balance, String percent, String comment, String purposeAmount, String active) {
+        this.name = name;
+        this.balance = balance;
+        this.percent = percent;
+        this.comment = comment;
+        this.purposeAmount = purposeAmount;
+    }
+
+    public String getBalance() {
         return balance;
     }
 
-    public Double getPercent() {
+    public String getPercent() {
         return percent;
     }
 
-    public Double getPurposeAmount() {
+    public String getPurposeAmount() {
         return purposeAmount;
     }
 
@@ -36,7 +48,7 @@ public class CategoryBody {
         return comment;
     }
 
-    public int getActive() {
+    public String getActive() {
         return active;
     }
 
@@ -44,7 +56,7 @@ public class CategoryBody {
         return name;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 }
