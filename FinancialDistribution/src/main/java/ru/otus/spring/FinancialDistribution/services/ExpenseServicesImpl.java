@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ExpenseServicesImpl implements ExpenseServices {
 
-    ExpenseRepositoryJpa repository;
+    private final ExpenseRepositoryJpa repository;
 
     ExpenseServicesImpl(ExpenseRepositoryJpa repository) {
         this.repository = repository;

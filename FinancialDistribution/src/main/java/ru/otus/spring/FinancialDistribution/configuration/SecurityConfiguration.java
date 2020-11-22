@@ -8,32 +8,36 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.otus.spring.FinancialDistribution.services.UserService;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    UserService userService;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .httpBasic()
+                .authorizeRequests()
+                .antMatchers("/activeCategories").hasAnyRole("ADMIN", "USER")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/swagger-ui/")
-                .authenticated()
+                .antMatchers("/addNewCategory").hasAnyRole("ADMIN")
                 .and()
-                .authorizeRequests()
-                //Когда прописываю hasAnyRole - первая страница http://localhost:8080/swagger-ui/
-                // страница пустая. Если убираю hasAnyRole - тогда норм просит логин с паролем,
-                //не ясно чего же с hasAnyRole не даёт ввести логин с паролем
-                .antMatchers("/swagger-ui/**")
-                .hasAnyRole("ADMIN");
+                .formLogin()
+                .and()
+                .logout().logoutUrl("/logout")
+                .and()
+                .exceptionHandling().accessDeniedPage("/accessDenied")
+                .and()
+                .rememberMe()
+                .key("keykeysecreet").tokenValiditySeconds(1000);
     }
-
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("123").roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("123").roles("ADMIN");
+    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userService);
     }
 
     @Bean
